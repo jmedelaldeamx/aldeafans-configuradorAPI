@@ -1,0 +1,154 @@
+---
+openapi: 3.0.0
+info:
+  title: Aldea Fans API
+  description: API de administración de Aldea Fans
+  contact:
+    email: jmedel@aldeamexico.com
+  version: 1.0.0
+servers:
+- url: https://virtserver.swaggerhub.com/JMEDEL_1/AldeaFansAPI/1.0.0
+  description: SwaggerHub API Auto Mocking
+tags:
+- name: Fans
+  description: Gestion de los fans
+- name: Fans - Uploads
+  description: Gestiona los uplodas del fan
+paths:
+  /fans:
+    get:
+      tags:
+      - Fans
+      summary: Retorna a los fans registrados
+      operationId: listUsers
+      parameters:
+      - name: status
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          enum:
+          - active
+          - inactive
+      responses:
+        "200":
+          description: search results matching criteria
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Users'
+        "400":
+          description: bad request
+        "404":
+          description: not found
+        "5XX":
+          description: Unexpected error
+    post:
+      tags:
+      - Fans
+      summary: Crea un nuevo fan
+      operationId: CreateFan
+      requestBody:
+        description: Body a enviar
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenericSchema'
+        required: true
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSchema'
+  /fans/{userUUID}:
+    get:
+      tags:
+      - Fans
+      summary: Retorna a un fan en específico
+      operationId: GetUser
+      parameters:
+      - name: userUUID
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSchema'
+    put:
+      tags:
+      - Fans
+      summary: Actualiza el estatus de un fan específico
+      operationId: UpdateStatusFan
+      parameters:
+      - name: userUUID
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSchema'
+    patch:
+      tags:
+      - Fans
+      summary: Actualiza a un fan específico
+      operationId: UpdateFan
+      parameters:
+      - name: userUUID
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSchema'
+components:
+  schemas:
+    Users:
+      required:
+      - id
+      - name
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: d290f1ee-6c54-4b01-90e6-d701748f0851
+        name:
+          type: string
+          example: user name
+    GenericSchema:
+      properties:
+        response:
+          type: string
+          example: example schema
+  responses:
+    "200":
+      description: Ok
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GenericSchema'
