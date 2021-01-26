@@ -10,11 +10,610 @@ servers:
 - url: https://virtserver.swaggerhub.com/JMEDEL_1/AldeaFansAPI/1.0.0
   description: SwaggerHub API Auto Mocking
 tags:
+- name: Celebridades
+  description: Gestion de las celebridades
+- name: Celebridades - Upgrade process
+  description: Gestion del proceso de upgrade a celebridad
+- name: Celebridades - Penalizaciones
+  description: Gestiona las penalizaciones impuestas a las celebridades
+- name: Celebridades - Documents
+  description: Gestiona las cargas de archivos para el proceso de acreditación de celebridad
+- name: Celebridades - Invoices
+  description: Gestiona la carga de facturas de las celebridades
+- name: Celebridades - Video Calls Schedule
+  description: Administra la agenda de video llamadas de las celebridades adquiridas por fans
+- name: Celebridades - Payments
+  description: Administra los pagos de las celebridades
 - name: Fans
   description: Gestion de los fans
 - name: Fans - Uploads
-  description: Gestiona los uplodas del fan
+  description: Gestiona la carga de foto de perfil del fan
 paths:
+  /celebrities:
+    get:
+      tags:
+      - Celebridades
+      summary: Retorna a las celebridades registradas
+      operationId: GetCelebrities
+      parameters:
+      - name: status
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          enum:
+          - active
+          - inactive
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSchema'
+    post:
+      tags:
+      - Celebridades
+      summary: Crea una nueva celebridad
+      operationId: CreateCelebretie
+      requestBody:
+        description: Body a enviar
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenericSchema'
+        required: true
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSchema'
+  /celebrities/{userUUID}:
+    get:
+      tags:
+      - Celebridades
+      summary: Retorna a una celebridad específica
+      operationId: GetCelebritie
+      parameters:
+      - name: userUUID
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSchema'
+    put:
+      tags:
+      - Celebridades
+      summary: Actualiza a la celebridad específica
+      operationId: UpdateCelebretie
+      parameters:
+      - name: userUUID
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        description: Body a enviar
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenericSchema'
+        required: true
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSchema'
+    patch:
+      tags:
+      - Celebridades
+      summary: Editar estatus de una celebridad
+      operationId: UpdateCelebretieStatus
+      parameters:
+      - name: userUUID
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        description: Body a enviar
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenericSchema'
+        required: true
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSchema'
+  /celebrities.upgrade-process:
+    get:
+      tags:
+      - Celebridades - Upgrade process
+      summary: Retorna todas las solicitudes de upgrade recibidas
+      operationId: GetCelebritiesUpgradeProcess
+      parameters:
+      - name: status
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          enum:
+          - active
+          - inactive
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSchema'
+    post:
+      tags:
+      - Celebridades - Upgrade process
+      summary: Crea una nueva solicitud de upgrade
+      operationId: CreateCelebretieUpgradeProcess
+      requestBody:
+        description: Body a enviar
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenericSchema'
+        required: true
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSchema'
+  /celebrities.upgrade-process/{userUUID}:
+    get:
+      tags:
+      - Celebridades - Upgrade process
+      summary: Retorna la solicitud de un usuario para el proceso de upgrade
+      operationId: GetCelebritieUpgradeProcess
+      parameters:
+      - name: userUUID
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSchema'
+    patch:
+      tags:
+      - Celebridades - Upgrade process
+      summary: Cambia el estatus de una solicitud de upgrade
+      operationId: UpdateCelebretieUpgradeProceessStatus
+      parameters:
+      - name: userUUID
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        description: Body a enviar
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenericSchema'
+        required: true
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSchema'
+  /celebrities.penalizations:
+    get:
+      tags:
+      - Celebridades - Penalizaciones
+      summary: Retorna todas las penalizaciones a celebridaes
+      operationId: GetCelebritiesPenalizations
+      parameters:
+      - name: status
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          enum:
+          - active
+          - inactive
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSchema'
+  /celebrities.penalizations/{userUUID}:
+    get:
+      tags:
+      - Celebridades - Penalizaciones
+      summary: Retorna las penalizaciones de una celebridad
+      operationId: GetCelebritiePenalization
+      parameters:
+      - name: userUUID
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSchema'
+  /celebrities.uploads.documents:
+    post:
+      tags:
+      - Celebridades - Documents
+      summary: Carga documentos y los asocia a una solicitud de upgrade
+      operationId: CreateCelebretieDocuments
+      requestBody:
+        description: Body a enviar
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenericSchema'
+        required: true
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSchema'
+  /celebrities.uploads.documents/{upgradeRequestId}:
+    get:
+      tags:
+      - Celebridades - Documents
+      summary: Consulta los documentos asociados a un proceso de upgrade
+      operationId: GetCelebritieDocumentsUpgradeProcess
+      parameters:
+      - name: upgradeRequestId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSchema'
+  /celebrities.uploads.documents/{documentId}:
+    delete:
+      tags:
+      - Celebridades - Documents
+      summary: Elimina un documento asociado a una solicitud de upgrade
+      operationId: DeleteCelebritieDocumentUpgradeProcess
+      parameters:
+      - name: documentId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSchema'
+  /celebrities.uploads.invoices:
+    post:
+      tags:
+      - Celebridades - Invoices
+      summary: Carga una nueva factura a un ciclo de pago
+      operationId: CreateCelebretieInvoice
+      requestBody:
+        description: Body a enviar
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenericSchema'
+        required: true
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSchema'
+  /celebrities.uploads.invoices/{paymentUUID}:
+    get:
+      tags:
+      - Celebridades - Invoices
+      summary: Consulta la factura asociada a un ciclo de pago
+      operationId: GetCelebritieInvoice
+      parameters:
+      - name: paymentUUID
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSchema'
+    put:
+      tags:
+      - Celebridades - Invoices
+      summary: Actualiza una factura asociada a un ciclo de pago
+      operationId: UpdateCelebretieInvoice
+      parameters:
+      - name: paymentUUID
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        description: Body a enviar
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenericSchema'
+        required: true
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSchema'
+    delete:
+      tags:
+      - Celebridades - Invoices
+      summary: Elimina una factura asociada a una solicitud de upgrade
+      operationId: DeleteCelebritieInvoice
+      parameters:
+      - name: paymentUUID
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSchema'
+  /celebrities.video-calls-schedule:
+    post:
+      tags:
+      - Celebridades - Video Calls Schedule
+      summary: Crea una nueva video llamada con un fan
+      operationId: CreateCelebretieVideoCallSchedule
+      requestBody:
+        description: Body a enviar
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenericSchema'
+        required: true
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSchema'
+  /celebrities.video-calls-schedule/{userUUID}:
+    get:
+      tags:
+      - Celebridades - Video Calls Schedule
+      summary: Retorna las video llamadas agendadas de una celebridad
+      operationId: GetCelebritieVideoCallSchedule
+      parameters:
+      - name: userUUID
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSchema'
+  /celebrities.video-calls-schedule/{videoCallScheduledUUID}:
+    put:
+      tags:
+      - Celebridades - Video Calls Schedule
+      summary: Actualiza una video llamada previamente agendada
+      operationId: UpdateCelebretieVideoCallSchedule
+      parameters:
+      - name: videoCallScheduledUUID
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        description: Body a enviar
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenericSchema'
+        required: true
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSchema'
+    patch:
+      tags:
+      - Celebridades - Video Calls Schedule
+      summary: Actualiza el estatus de una video llamada previamente agendada
+      operationId: UpdateCelebretieVideoCallScheduleStatus
+      parameters:
+      - name: videoCallScheduledUUID
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        description: Body a enviar
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenericSchema'
+        required: true
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSchema'
+  /celebrities.payments:
+    get:
+      tags:
+      - Celebridades - Payments
+      summary: Retorna los pagos a celebridades
+      operationId: GetCelebritiesPayments
+      parameters:
+      - name: status
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          enum:
+          - active
+          - inactive
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSchema'
+    post:
+      tags:
+      - Celebridades - Payments
+      summary: Registra el pago a una celebridad
+      operationId: CreateCelebretiePayment
+      requestBody:
+        description: Body a enviar
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenericSchema'
+        required: true
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSchema'
+  /celebrities.payments/{userUUID}:
+    get:
+      tags:
+      - Celebridades - Payments
+      summary: Retorna el pago de una celebridad
+      operationId: GetCelebritiePayment
+      parameters:
+      - name: userUUID
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSchema'
+  /celebrities.payments/{paymentUUID}:
+    patch:
+      tags:
+      - Celebridades - Payments
+      summary: Actualiza el estatus de un pago a celebridad
+      operationId: UpdateCelebritiePaymentStatus
+      parameters:
+      - name: paymentUUID
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSchema'
   /fans:
     get:
       tags:
@@ -125,6 +724,47 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GenericSchema'
+  /fans.uploads.profile-picture/{userUUID}:
+    get:
+      tags:
+      - Fans - Uploads
+      summary: Recupera la información de una foto de perfil del fan
+      operationId: GetFanProfilePicture
+      parameters:
+      - name: userUUID
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSchema'
+    put:
+      tags:
+      - Fans - Uploads
+      summary: Crea o reemplaza una foto de perfil del fan
+      operationId: UpdateFanProfilePicture
+      parameters:
+      - name: userUUID
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSchema'
 components:
   schemas:
     Users:
@@ -152,3 +792,15 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/GenericSchema'
+  parameters:
+    UserStatus:
+      name: status
+      in: query
+      required: false
+      style: form
+      explode: true
+      schema:
+        type: string
+        enum:
+        - active
+        - inactive
