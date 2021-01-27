@@ -59,7 +59,7 @@ paths:
     get:
       tags:
       - Celebridades
-      summary: Retorna a las celebridades registradas
+      summary: Lista a las celebridades registradas
       operationId: ListCelebrities
       parameters:
       - name: status
@@ -102,7 +102,7 @@ paths:
     get:
       tags:
       - Celebridades
-      summary: Retorna a una celebridad específica
+      summary: Obtiene a una celebridad específica
       operationId: GetCelebritie
       parameters:
       - name: userUUID
@@ -177,7 +177,7 @@ paths:
     get:
       tags:
       - Celebridades - Upgrade process
-      summary: Retorna todas las solicitudes de upgrade recibidas
+      summary: Lista todas las solicitudes de upgrade recibidas
       operationId: ListCelebritiesUpgradeProcess
       parameters:
       - name: status
@@ -220,7 +220,7 @@ paths:
     get:
       tags:
       - Celebridades - Upgrade process
-      summary: Retorna la solicitud de un usuario para el proceso de upgrade
+      summary: Obtiene la solicitud de un usuario para el proceso de upgrade
       operationId: GetCelebritieUpgradeProcess
       parameters:
       - name: userUUID
@@ -268,7 +268,7 @@ paths:
     get:
       tags:
       - Celebridades - Penalizaciones
-      summary: Retorna todas las penalizaciones a celebridaes
+      summary: Lista todas las penalizaciones a celebridaes
       operationId: ListCelebritiesPenalizations
       parameters:
       - name: status
@@ -292,7 +292,7 @@ paths:
     get:
       tags:
       - Celebridades - Penalizaciones
-      summary: Retorna las penalizaciones de una celebridad
+      summary: Obtiene las penalizaciones de una celebridad
       operationId: GetCelebritiePenalization
       parameters:
       - name: userUUID
@@ -333,7 +333,7 @@ paths:
     get:
       tags:
       - Celebridades - Documents
-      summary: Consulta los documentos asociados a un proceso de upgrade
+      summary: Lista los documentos asociados a un proceso de upgrade
       operationId: GetCelebritieDocumentsUpgradeProcess
       parameters:
       - name: upgradeRequestId
@@ -506,7 +506,7 @@ paths:
     get:
       tags:
       - Celebridades - Video Calls Schedule
-      summary: Retorna las video llamadas agendadas de una celebridad
+      summary: Lista las video llamadas agendadas de una celebridad
       operationId: GetVideoCallScheduleByUser
       parameters:
       - name: userUUID
@@ -582,7 +582,7 @@ paths:
     get:
       tags:
       - Celebridades - Payments
-      summary: Retorna los pagos a celebridades
+      summary: Lista los pagos a celebridades
       operationId: ListCelebritiesPayments
       parameters:
       - name: status
@@ -625,7 +625,7 @@ paths:
     get:
       tags:
       - Celebridades - Payments
-      summary: Retorna el pago de una celebridad
+      summary: Obtiene el pago de una celebridad
       operationId: GetCelebritiePayment
       parameters:
       - name: userUUID
@@ -674,7 +674,7 @@ paths:
     get:
       tags:
       - Fans
-      summary: Retorna a los fans registrados
+      summary: Lista a los fans registrados
       operationId: ListUsers
       parameters:
       - name: status
@@ -723,7 +723,7 @@ paths:
     get:
       tags:
       - Fans
-      summary: Retorna a un fan en específico
+      summary: Obtiene a un fan en específico
       operationId: GetUser
       parameters:
       - name: userUUID
@@ -798,7 +798,7 @@ paths:
     get:
       tags:
       - Fans - Uploads
-      summary: Recupera la información de una foto de perfil del fan
+      summary: Obtiene la información de una foto de perfil del fan
       operationId: GetFanProfilePicture
       parameters:
       - name: userUUID
@@ -846,7 +846,7 @@ paths:
     get:
       tags:
       - Fans - Purchases
-      summary: Retorna los datos de compras de video llamadas
+      summary: Lista los datos de compras de video llamadas
       operationId: ListFansPurchases
       parameters:
       - name: status
@@ -870,7 +870,7 @@ paths:
     get:
       tags:
       - Fans - Purchases
-      summary: Retorna los datos de compras de las video llamadas de un fan
+      summary: Lista las compras de video llamadas de un fan
       operationId: GetFanPurchases
       parameters:
       - name: userUUID
@@ -891,7 +891,7 @@ paths:
     get:
       tags:
       - Fans - Purchases
-      summary: Retorna los datos de compra de una video llamada de un fan
+      summary: Obtiene los datos de compra de una video llamada de un fan
       operationId: GetFanPurchase
       parameters:
       - name: userUUID
@@ -919,7 +919,7 @@ paths:
     get:
       tags:
       - Fans - Refounds
-      summary: Retorna las devoluciones de fondos a fans
+      summary: Lista las devoluciones de fondos a fans
       operationId: ListFansRefounds
       parameters:
       - name: status
@@ -962,7 +962,7 @@ paths:
     get:
       tags:
       - Fans - Refounds
-      summary: Retorna las devoluciones de fondos de un fan específico
+      summary: Lista las devoluciones de fondos de un fan específico
       operationId: GetFanRefounds
       parameters:
       - name: userUUID
@@ -983,7 +983,7 @@ paths:
     get:
       tags:
       - Fans - Refounds
-      summary: Retorna la devolución de fondos específicos de un fan
+      summary: Obtiene el detalle de una devolución de fondos de un fan
       operationId: GetFanRefound
       parameters:
       - name: userUUID
@@ -1045,7 +1045,7 @@ paths:
     get:
       tags:
       - Managers
-      summary: Retorna a los managers de celebridades
+      summary: Lista a los managers de celebridades
       operationId: ListManagers
       parameters:
       - name: status
@@ -1088,7 +1088,7 @@ paths:
     get:
       tags:
       - Managers
-      summary: Retorna a un manager específico
+      summary: Obtiene a un manager específico
       operationId: GetManager
       parameters:
       - name: userUUID
@@ -1156,7 +1156,7 @@ paths:
     get:
       tags:
       - Metodos de pago
-      summary: Retorna las formas de pago asociadas en stripe de un usuario específico
+      summary: Lista las formas de pago asociadas en stripe de un usuario específico
       operationId: GetPaymentMethod
       parameters:
       - name: userUUID
@@ -1177,8 +1177,8 @@ paths:
     get:
       tags:
       - Ganancias - Celebridad
-      summary: Retorna las ganancias de una celebridad
-      operationId: GetCelebritieEarningsByUser
+      summary: Lista las ganancias de una celebridad
+      operationId: ListCelebritieEarningsByUser
       parameters:
       - name: userUUID
         in: path
@@ -1198,7 +1198,7 @@ paths:
     get:
       tags:
       - Ganancias - Aldea
-      summary: Retorna las ganancias de aldea
+      summary: Lista las ganancias de aldea
       operationId: ListAldeaEarnings
       parameters:
       - name: status
@@ -1222,7 +1222,7 @@ paths:
     get:
       tags:
       - Salidas de emergencia
-      summary: Retorna las salidas express generadas
+      summary: Lista las salidas express generadas
       operationId: ListEmergencyExits
       parameters:
       - name: status
@@ -1265,8 +1265,8 @@ paths:
     get:
       tags:
       - Salidas de emergencia
-      summary: Retorna las salidas express generadas de un usuario en partícular
-      operationId: GetEmergencyExitsByUser
+      summary: Lista las salidas express donde se involucra a un usuario en partícular
+      operationId: ListEmergencyExitsByUser
       parameters:
       - name: userUUID
         in: path
@@ -1314,7 +1314,7 @@ paths:
     get:
       tags:
       - Aclaraciones
-      summary: Retorna las disputas registradas
+      summary: Lista las disputas registradas
       operationId: ListDisputes
       parameters:
       - name: status
@@ -1357,7 +1357,7 @@ paths:
     get:
       tags:
       - Aclaraciones
-      summary: Retorna una disputa específica
+      summary: Obtiene el detalle de una disputa específica
       operationId: GetDisputeById
       parameters:
       - name: disputeUUID
@@ -1405,7 +1405,7 @@ paths:
     get:
       tags:
       - Analytics - Dashboard
-      summary: Retorna los indicadores clave generales de cada ámbito
+      summary: Lista los indicadores clave generales de cada ámbito
       operationId: ListDashboardKeyIndicators
       parameters:
       - name: status
@@ -1429,7 +1429,7 @@ paths:
     get:
       tags:
       - Analytics - Dashboard
-      summary: Retorna los indicadores clave de por usaurio
+      summary: Lista los indicadores clave de por usaurio
       operationId: ListDashboardKeyIndicatorsByUser
       parameters:
       - name: userUUID
@@ -1450,7 +1450,7 @@ paths:
     get:
       tags:
       - Analytics - Dashboard
-      summary: Retorna los datos de diferentes métricas
+      summary: Lista los datos de diferentes métricas
       operationId: ListDashboardData
       parameters:
       - name: status
@@ -1474,7 +1474,7 @@ paths:
     get:
       tags:
       - Analytics - Reports
-      summary: Retorna los datos requeridos por el reporteador de la aplicación
+      summary: Lista los datos requeridos por el reporteador de la aplicación
       operationId: ListAnalyticsReports
       parameters:
       - name: status
@@ -1518,7 +1518,7 @@ paths:
     get:
       tags:
       - Propiedades - Sistema
-      summary: Retorna las propiedades del sistema registradas
+      summary: Lista las propiedades del sistema registradas
       operationId: ListSystemProperties
       parameters:
       - name: status
@@ -1542,7 +1542,7 @@ paths:
     put:
       tags:
       - Propiedades - Sistema
-      summary: Modifica una propiedad del sistema
+      summary: Actualiza una propiedad del sistema
       operationId: UpdateSystemPropertie
       parameters:
       - name: propertieUUID
@@ -1570,7 +1570,7 @@ paths:
     get:
       tags:
       - Propiedades - APP
-      summary: Retorna las propiedades del sistema requeridas por la aplicación
+      summary: Lista las propiedades del sistema requeridas por la aplicación
       operationId: ListAppProperties
       parameters:
       - name: status
@@ -1594,7 +1594,7 @@ paths:
     get:
       tags:
       - Ayuda
-      summary: Retorna las solicitudes de ayuda registradas
+      summary: Lista las solicitudes de ayuda registradas
       operationId: ListSupportRequests
       parameters:
       - name: status
@@ -1637,7 +1637,7 @@ paths:
     get:
       tags:
       - Ayuda
-      summary: Retorna una solicitud de ayuda específica
+      summary: Obtiene una solicitud de ayuda específica
       operationId: GetSupportRequest
       parameters:
       - name: requestUUID
