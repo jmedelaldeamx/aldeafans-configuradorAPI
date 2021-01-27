@@ -1,0 +1,2 @@
+Swagger API Link
+    - https://app.swaggerhub.com/apis/JMEDEL_1/AldeaFansAPI/1.0.0
