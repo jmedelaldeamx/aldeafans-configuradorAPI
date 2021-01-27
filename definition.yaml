@@ -20,8 +20,6 @@ tags:
   description: Gestiona las cargas de archivos para el proceso de acreditación de celebridad
 - name: Celebridades - Invoices
   description: Gestiona la carga de facturas de las celebridades
-- name: Celebridades - Video Calls Schedule
-  description: Administra la agenda de video llamadas de las celebridades adquiridas por fans
 - name: Celebridades - Payments
   description: Administra los pagos de las celebridades
 - name: Fans
@@ -34,6 +32,8 @@ tags:
   description: Administra los datos de las compras de video llamadas
 - name: Managers
   description: Gestiona a los administradores de celebridades
+- name: Video llamadas - Schedule
+  description: Administra la agenda de video llamadas de las celebridades adquiridas por fans
 - name: Metodos de pago
   description: Administra internamente las formas de pago de los fans que tienen asociadas en Stripe
 - name: Ganancias - Celebridad
@@ -459,12 +459,35 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GenericSchema'
-  /celebrities.video-calls-schedule:
+  /video-calls-schedule:
+    get:
+      tags:
+      - Video llamadas - Schedule
+      summary: Lista las video llamadas generadas
+      operationId: ListVideoCallsScheduled
+      parameters:
+      - name: status
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          enum:
+          - active
+          - inactive
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSchema'
     post:
       tags:
-      - Celebridades - Video Calls Schedule
+      - Video llamadas - Schedule
       summary: Crea una nueva video llamada con un fan
-      operationId: CreateCelebretieVideoCallSchedule
+      operationId: CreateVideoCallSchedule
       requestBody:
         description: Body a enviar
         content:
@@ -479,12 +502,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GenericSchema'
-  /celebrities.video-calls-schedule/{userUUID}:
+  /video-calls-schedule/{userUUID}:
     get:
       tags:
       - Celebridades - Video Calls Schedule
       summary: Retorna las video llamadas agendadas de una celebridad
-      operationId: GetCelebritieVideoCallSchedule
+      operationId: GetVideoCallScheduleByUser
       parameters:
       - name: userUUID
         in: path
@@ -500,12 +523,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GenericSchema'
-  /celebrities.video-calls-schedule/{videoCallScheduledUUID}:
+  /video-calls-schedule/{videoCallScheduledUUID}:
     put:
       tags:
-      - Celebridades - Video Calls Schedule
+      - Video llamadas - Schedule
       summary: Actualiza una video llamada previamente agendada
-      operationId: UpdateCelebretieVideoCallSchedule
+      operationId: UpdateVideoCallSchedule
       parameters:
       - name: videoCallScheduledUUID
         in: path
@@ -530,9 +553,9 @@ paths:
                 $ref: '#/components/schemas/GenericSchema'
     patch:
       tags:
-      - Celebridades - Video Calls Schedule
+      - Video llamadas - Schedule
       summary: Actualiza el estatus de una video llamada previamente agendada
-      operationId: UpdateCelebretieVideoCallScheduleStatus
+      operationId: UpdateVideoCallScheduleStatus
       parameters:
       - name: videoCallScheduledUUID
         in: path
@@ -1382,7 +1405,7 @@ paths:
     get:
       tags:
       - Analytics - Dashboard
-      summary: Retorna los indicadores clave de cada ámbito
+      summary: Retorna los indicadores clave generales de cada ámbito
       operationId: ListDashboardKeyIndicators
       parameters:
       - name: status
@@ -1395,6 +1418,27 @@ paths:
           enum:
           - active
           - inactive
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSchema'
+  /analytics.dashboard.key-indicators/{userUUID}:
+    get:
+      tags:
+      - Analytics - Dashboard
+      summary: Retorna los indicadores clave de por usaurio
+      operationId: ListDashboardKeyIndicatorsByUser
+      parameters:
+      - name: userUUID
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
       responses:
         "200":
           description: Ok
