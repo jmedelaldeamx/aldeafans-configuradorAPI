@@ -1,2 +1,4 @@
+GitHub Repo API
+    - https://github.com/jmedelaldeamx/aldeafans-configuradorAPI/
 Swagger API Link
     - https://app.swaggerhub.com/apis/JMEDEL_1/AldeaFansAPI/1.0.0
