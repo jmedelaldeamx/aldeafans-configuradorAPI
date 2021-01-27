@@ -28,13 +28,39 @@ tags:
   description: Gestion de los fans
 - name: Fans - Uploads
   description: Gestiona la carga de foto de perfil del fan
+- name: Fans - Refounds
+  description: Administra las devoluciones a fans
+- name: Fans - Purchases
+  description: Administra los datos de las compras de video llamadas
+- name: Managers
+  description: Gestiona a los administradores de celebridades
+- name: Metodos de pago
+  description: Administra internamente las formas de pago de los fans que tienen asociadas en Stripe
+- name: Ganancias - Celebridad
+  description: Administra las ganancias de las celebridades
+- name: Ganancias - Aldea
+  description: Administra las ganancias de Aldea
+- name: Salidas de emergencia
+  description: Administra las salidas express
+- name: Aclaraciones
+  description: Administra las aclaraciones solicitadas por fan por sus videos de salidas express
+- name: Analytics - Dashboard
+  description: Administra los indicadores de los diferentes dashboards en el configurador
+- name: Analytics - Reports
+  description: Admisnitra los reportes generados en el configurador
+- name: Propiedades - Sistema
+  description: Administra las propiedades del configurador
+- name: Propiedades - APP
+  description: Entrega las propiedades que necesita el app para operar
+- name: Ayuda
+  description: Admisnitra las soliciutdes de ayuda desde el app
 paths:
   /celebrities:
     get:
       tags:
       - Celebridades
       summary: Retorna a las celebridades registradas
-      operationId: GetCelebrities
+      operationId: ListCelebrities
       parameters:
       - name: status
         in: query
@@ -152,7 +178,7 @@ paths:
       tags:
       - Celebridades - Upgrade process
       summary: Retorna todas las solicitudes de upgrade recibidas
-      operationId: GetCelebritiesUpgradeProcess
+      operationId: ListCelebritiesUpgradeProcess
       parameters:
       - name: status
         in: query
@@ -243,7 +269,7 @@ paths:
       tags:
       - Celebridades - Penalizaciones
       summary: Retorna todas las penalizaciones a celebridaes
-      operationId: GetCelebritiesPenalizations
+      operationId: ListCelebritiesPenalizations
       parameters:
       - name: status
         in: query
@@ -534,7 +560,7 @@ paths:
       tags:
       - Celebridades - Payments
       summary: Retorna los pagos a celebridades
-      operationId: GetCelebritiesPayments
+      operationId: ListCelebritiesPayments
       parameters:
       - name: status
         in: query
@@ -607,6 +633,13 @@ paths:
         explode: false
         schema:
           type: string
+      requestBody:
+        description: Body a enviar
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenericSchema'
+        required: true
       responses:
         "200":
           description: Ok
@@ -619,7 +652,7 @@ paths:
       tags:
       - Fans
       summary: Retorna a los fans registrados
-      operationId: listUsers
+      operationId: ListUsers
       parameters:
       - name: status
         in: query
@@ -697,6 +730,13 @@ paths:
         explode: false
         schema:
           type: string
+      requestBody:
+        description: Body a enviar
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenericSchema'
+        required: true
       responses:
         "200":
           description: Ok
@@ -717,6 +757,13 @@ paths:
         explode: false
         schema:
           type: string
+      requestBody:
+        description: Body a enviar
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenericSchema'
+        required: true
       responses:
         "200":
           description: Ok
@@ -758,6 +805,831 @@ paths:
         explode: false
         schema:
           type: string
+      requestBody:
+        description: Body a enviar
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenericSchema'
+        required: true
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSchema'
+  /fans.purchases:
+    get:
+      tags:
+      - Fans - Purchases
+      summary: Retorna los datos de compras de video llamadas
+      operationId: ListFansPurchases
+      parameters:
+      - name: status
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          enum:
+          - active
+          - inactive
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSchema'
+  /fans.purchases/{userUUID}:
+    get:
+      tags:
+      - Fans - Purchases
+      summary: Retorna los datos de compras de las video llamadas de un fan
+      operationId: GetFanPurchases
+      parameters:
+      - name: userUUID
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSchema'
+  /fans.purchases/{userUUID}/{purchaseUUID}:
+    get:
+      tags:
+      - Fans - Purchases
+      summary: Retorna los datos de compra de una video llamada de un fan
+      operationId: GetFanPurchase
+      parameters:
+      - name: userUUID
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: purchaseUUID
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSchema'
+  /fans.refounds:
+    get:
+      tags:
+      - Fans - Refounds
+      summary: Retorna las devoluciones de fondos a fans
+      operationId: ListFansRefounds
+      parameters:
+      - name: status
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          enum:
+          - active
+          - inactive
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSchema'
+    post:
+      tags:
+      - Fans - Refounds
+      summary: Crea una nueva decolución de fondos
+      operationId: CreateFanRefound
+      requestBody:
+        description: Body a enviar
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenericSchema'
+        required: true
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSchema'
+  /fans.refounds/{userUUID}:
+    get:
+      tags:
+      - Fans - Refounds
+      summary: Retorna las devoluciones de fondos de un fan específico
+      operationId: GetFanRefounds
+      parameters:
+      - name: userUUID
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSchema'
+  /fans.refounds/{userUUID}/{refoundUUID}:
+    get:
+      tags:
+      - Fans - Refounds
+      summary: Retorna la devolución de fondos específicos de un fan
+      operationId: GetFanRefound
+      parameters:
+      - name: userUUID
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: refoundUUID
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSchema'
+    put:
+      tags:
+      - Fans - Refounds
+      summary: Actualiza un devolución de fondos
+      operationId: UpdateFanRefound
+      parameters:
+      - name: userUUID
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: refoundUUID
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        description: Body a enviar
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenericSchema'
+        required: true
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSchema'
+  /managers:
+    get:
+      tags:
+      - Managers
+      summary: Retorna a los managers de celebridades
+      operationId: ListManagers
+      parameters:
+      - name: status
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          enum:
+          - active
+          - inactive
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSchema'
+    post:
+      tags:
+      - Managers
+      summary: Crea un nuevo manager
+      operationId: CreateManager
+      requestBody:
+        description: Body a enviar
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenericSchema'
+        required: true
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSchema'
+  /managers/{userUUID}:
+    get:
+      tags:
+      - Managers
+      summary: Retorna a un manager específico
+      operationId: GetManager
+      parameters:
+      - name: userUUID
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSchema'
+    put:
+      tags:
+      - Managers
+      summary: Actualiza a un manager específico
+      operationId: UpdateManager
+      parameters:
+      - name: userUUID
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        description: Body a enviar
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenericSchema'
+        required: true
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSchema'
+    delete:
+      tags:
+      - Managers
+      summary: Elimina a un manager existente
+      operationId: DeleteManager
+      parameters:
+      - name: userUUID
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSchema'
+  /payments-methods/{userUUID}:
+    get:
+      tags:
+      - Metodos de pago
+      summary: Retorna las formas de pago asociadas en stripe de un usuario específico
+      operationId: GetPaymentMethod
+      parameters:
+      - name: userUUID
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSchema'
+  /earnings.celebrities/{userUUID}:
+    get:
+      tags:
+      - Ganancias - Celebridad
+      summary: Retorna las ganancias de una celebridad
+      operationId: GetCelebritieEarningsByUser
+      parameters:
+      - name: userUUID
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSchema'
+  /earnigns.aldea:
+    get:
+      tags:
+      - Ganancias - Aldea
+      summary: Retorna las ganancias de aldea
+      operationId: ListAldeaEarnings
+      parameters:
+      - name: status
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          enum:
+          - active
+          - inactive
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSchema'
+  /emergency-exits:
+    get:
+      tags:
+      - Salidas de emergencia
+      summary: Retorna las salidas express generadas
+      operationId: ListEmergencyExits
+      parameters:
+      - name: status
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          enum:
+          - active
+          - inactive
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSchema'
+    post:
+      tags:
+      - Salidas de emergencia
+      summary: Crea una nueva salida de emergencia
+      operationId: CreateEmergencyExit
+      requestBody:
+        description: Body a enviar
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenericSchema'
+        required: true
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSchema'
+  /emergency-exits/{userUUID}:
+    get:
+      tags:
+      - Salidas de emergencia
+      summary: Retorna las salidas express generadas de un usuario en partícular
+      operationId: GetEmergencyExitsByUser
+      parameters:
+      - name: userUUID
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSchema'
+  /emergency-exits/{videoCallScheduledUUID}:
+    patch:
+      tags:
+      - Salidas de emergencia
+      summary: Actualiza el estatus de una salida de emergencia
+      operationId: UpdateEmergencyExitByScheduledId
+      parameters:
+      - name: videoCallScheduledUUID
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        description: Body a enviar
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenericSchema'
+        required: true
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSchema'
+  /disputes:
+    get:
+      tags:
+      - Aclaraciones
+      summary: Retorna las disputas registradas
+      operationId: ListDisputes
+      parameters:
+      - name: status
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          enum:
+          - active
+          - inactive
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSchema'
+    post:
+      tags:
+      - Aclaraciones
+      summary: Crea una nueva aclaración de un fan
+      operationId: CreateDispute
+      requestBody:
+        description: Body a enviar
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenericSchema'
+        required: true
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSchema'
+  /disputes/{disputeUUID}:
+    get:
+      tags:
+      - Aclaraciones
+      summary: Retorna una disputa específica
+      operationId: GetDisputeById
+      parameters:
+      - name: disputeUUID
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSchema'
+    put:
+      tags:
+      - Aclaraciones
+      summary: Actualiza una disputa específica
+      operationId: UpdateDisputeById
+      parameters:
+      - name: disputeUUID
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        description: Body a enviar
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenericSchema'
+        required: true
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSchema'
+  /analytics.dashboard.key-indicators:
+    get:
+      tags:
+      - Analytics - Dashboard
+      summary: Retorna los indicadores clave de cada ámbito
+      operationId: ListDashboardKeyIndicators
+      parameters:
+      - name: status
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          enum:
+          - active
+          - inactive
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSchema'
+  /analytics.dashboard.data:
+    get:
+      tags:
+      - Analytics - Dashboard
+      summary: Retorna los datos de diferentes métricas
+      operationId: ListDashboardData
+      parameters:
+      - name: status
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          enum:
+          - active
+          - inactive
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSchema'
+  /analytics.reports:
+    get:
+      tags:
+      - Analytics - Reports
+      summary: Retorna los datos requeridos por el reporteador de la aplicación
+      operationId: ListAnalyticsReports
+      parameters:
+      - name: status
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          enum:
+          - active
+          - inactive
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSchema'
+  /analytics.tracking:
+    post:
+      tags:
+      - Analytics - Tracking
+      summary: Registra un nuevo evento
+      operationId: CreateAnalyticsTrackingEvent
+      requestBody:
+        description: Body a enviar
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenericSchema'
+        required: true
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSchema'
+  /system.properties:
+    get:
+      tags:
+      - Propiedades - Sistema
+      summary: Retorna las propiedades del sistema registradas
+      operationId: ListSystemProperties
+      parameters:
+      - name: status
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          enum:
+          - active
+          - inactive
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSchema'
+  /system.properties/{propertieUUID}:
+    put:
+      tags:
+      - Propiedades - Sistema
+      summary: Modifica una propiedad del sistema
+      operationId: UpdateSystemPropertie
+      parameters:
+      - name: propertieUUID
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        description: Body a enviar
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenericSchema'
+        required: true
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSchema'
+  /app.properties:
+    get:
+      tags:
+      - Propiedades - APP
+      summary: Retorna las propiedades del sistema requeridas por la aplicación
+      operationId: ListAppProperties
+      parameters:
+      - name: status
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          enum:
+          - active
+          - inactive
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSchema'
+  /support-request:
+    get:
+      tags:
+      - Ayuda
+      summary: Retorna las solicitudes de ayuda registradas
+      operationId: ListSupportRequests
+      parameters:
+      - name: status
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          enum:
+          - active
+          - inactive
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSchema'
+    post:
+      tags:
+      - Ayuda
+      summary: Crea una nueva solicitud de soporte
+      operationId: CreateSupportRequest
+      requestBody:
+        description: Body a enviar
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenericSchema'
+        required: true
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSchema'
+  /support-request/{requestUUID}:
+    get:
+      tags:
+      - Ayuda
+      summary: Retorna una solicitud de ayuda específica
+      operationId: GetSupportRequest
+      parameters:
+      - name: requestUUID
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSchema'
+    patch:
+      tags:
+      - Ayuda
+      summary: Actualiza el estatus de una solicitud de soporte
+      operationId: UpdateSupportRequestStatus
+      parameters:
+      - name: requestUUID
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        description: Body a enviar
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenericSchema'
+        required: true
       responses:
         "200":
           description: Ok
