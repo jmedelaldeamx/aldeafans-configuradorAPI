@@ -30,8 +30,6 @@ tags:
   description: Administra las devoluciones a fans
 - name: Fans - Purchases
   description: Administra los datos de las compras de video llamadas
-- name: Fans - Claims
-  description: Administra las reclamaciones de fans por videos de salidas express
 - name: Managers
   description: Gestiona a los administradores de celebridades
 - name: Video llamadas - Schedule
@@ -40,8 +38,6 @@ tags:
   description: Administra internamente las formas de pago de los fans que tienen asociadas en Stripe
 - name: Salidas de emergencia
   description: Administra las salidas express
-- name: Aclaraciones
-  description: Administra las aclaraciones solicitadas por fan por sus videos de salidas express
 - name: Analytics - Dashboard
   description: Administra los indicadores de los diferentes dashboards en el configurador
 - name: Analytics - Reports
@@ -503,7 +499,7 @@ paths:
   /video-calls-schedule/{userUUID}:
     get:
       tags:
-      - Celebridades - Video Calls Schedule
+      - Video llamadas - Schedule
       summary: Lista las video llamadas agendadas de una celebridad
       operationId: GetVideoCallScheduleByUser
       parameters:
@@ -1243,97 +1239,6 @@ paths:
       operationId: UpdateEmergencyExitByScheduledId
       parameters:
       - name: videoCallScheduledUUID
-        in: path
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-      requestBody:
-        description: Body a enviar
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/GenericSchema'
-        required: true
-      responses:
-        "200":
-          description: Ok
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GenericSchema'
-  /disputes:
-    get:
-      tags:
-      - Aclaraciones
-      summary: Lista las disputas registradas
-      operationId: ListDisputes
-      parameters:
-      - name: status
-        in: query
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: string
-          enum:
-          - active
-          - inactive
-      responses:
-        "200":
-          description: Ok
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GenericSchema'
-    post:
-      tags:
-      - Aclaraciones
-      summary: Crea una nueva aclaración de un fan
-      operationId: CreateDispute
-      requestBody:
-        description: Body a enviar
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/GenericSchema'
-        required: true
-      responses:
-        "200":
-          description: Ok
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GenericSchema'
-  /disputes/{disputeUUID}:
-    get:
-      tags:
-      - Aclaraciones
-      summary: Obtiene el detalle de una disputa específica
-      operationId: GetDisputeById
-      parameters:
-      - name: disputeUUID
-        in: path
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-      responses:
-        "200":
-          description: Ok
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GenericSchema'
-    put:
-      tags:
-      - Aclaraciones
-      summary: Actualiza una disputa específica
-      operationId: UpdateDisputeById
-      parameters:
-      - name: disputeUUID
         in: path
         required: true
         style: simple
