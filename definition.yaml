@@ -30,16 +30,14 @@ tags:
   description: Administra las devoluciones a fans
 - name: Fans - Purchases
   description: Administra los datos de las compras de video llamadas
+- name: Fans - Claims
+  description: Administra las reclamaciones de fans por videos de salidas express
 - name: Managers
   description: Gestiona a los administradores de celebridades
 - name: Video llamadas - Schedule
   description: Administra la agenda de video llamadas de las celebridades adquiridas por fans
 - name: Metodos de pago
   description: Administra internamente las formas de pago de los fans que tienen asociadas en Stripe
-- name: Ganancias - Celebridad
-  description: Administra las ganancias de las celebridades
-- name: Ganancias - Aldea
-  description: Administra las ganancias de Aldea
 - name: Salidas de emergencia
   description: Administra las salidas express
 - name: Aclaraciones
@@ -1166,51 +1164,6 @@ paths:
         explode: false
         schema:
           type: string
-      responses:
-        "200":
-          description: Ok
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GenericSchema'
-  /earnings.celebrities/{userUUID}:
-    get:
-      tags:
-      - Ganancias - Celebridad
-      summary: Lista las ganancias de una celebridad
-      operationId: ListCelebritieEarningsByUser
-      parameters:
-      - name: userUUID
-        in: path
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-      responses:
-        "200":
-          description: Ok
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GenericSchema'
-  /earnigns.aldea:
-    get:
-      tags:
-      - Ganancias - Aldea
-      summary: Lista las ganancias de aldea
-      operationId: ListAldeaEarnings
-      parameters:
-      - name: status
-        in: query
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: string
-          enum:
-          - active
-          - inactive
       responses:
         "200":
           description: Ok
