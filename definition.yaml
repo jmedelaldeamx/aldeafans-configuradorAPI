@@ -167,7 +167,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GenericSchema'
-  /celebrities.upgrade-process:
+  /celebrities/upgrade-process:
     get:
       tags:
       - Celebridades - Upgrade process
@@ -210,7 +210,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GenericSchema'
-  /celebrities.upgrade-process/{userUUID}:
+  /celebrities/upgrade-process/{userUUID}:
     get:
       tags:
       - Celebridades - Upgrade process
@@ -258,7 +258,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GenericSchema'
-  /celebrities.penalizations:
+  /celebrities/penalizations:
     get:
       tags:
       - Celebridades - Penalizaciones
@@ -282,7 +282,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GenericSchema'
-  /celebrities.penalizations/{userUUID}:
+  /celebrities/penalizations/{userUUID}:
     get:
       tags:
       - Celebridades - Penalizaciones
@@ -303,7 +303,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GenericSchema'
-  /celebrities.uploads.documents:
+  /celebrities/uploads/documents:
     post:
       tags:
       - Celebridades - Documents
@@ -323,7 +323,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GenericSchema'
-  /celebrities.uploads.documents/{upgradeRequestId}:
+  /celebrities/uploads/documents/{upgradeRequestId}:
     get:
       tags:
       - Celebridades - Documents
@@ -344,7 +344,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GenericSchema'
-  /celebrities.uploads.documents/{documentId}:
+  /celebrities/uploads/documents/{documentId}:
     delete:
       tags:
       - Celebridades - Documents
@@ -365,7 +365,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GenericSchema'
-  /celebrities.uploads.invoices:
+  /celebrities/uploads/invoices:
     post:
       tags:
       - Celebridades - Invoices
@@ -385,7 +385,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GenericSchema'
-  /celebrities.uploads.invoices/{paymentUUID}:
+  /celebrities/uploads/nvoices/{paymentUUID}:
     get:
       tags:
       - Celebridades - Invoices
@@ -453,126 +453,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GenericSchema'
-  /video-calls-schedule:
-    get:
-      tags:
-      - Video llamadas - Schedule
-      summary: Lista las video llamadas generadas
-      operationId: ListVideoCallsScheduled
-      parameters:
-      - name: status
-        in: query
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: string
-          enum:
-          - active
-          - inactive
-      responses:
-        "200":
-          description: Ok
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GenericSchema'
-    post:
-      tags:
-      - Video llamadas - Schedule
-      summary: Crea una nueva video llamada con un fan
-      operationId: CreateVideoCallSchedule
-      requestBody:
-        description: Body a enviar
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/GenericSchema'
-        required: true
-      responses:
-        "200":
-          description: Ok
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GenericSchema'
-  /video-calls-schedule/{userUUID}:
-    get:
-      tags:
-      - Video llamadas - Schedule
-      summary: Lista las video llamadas agendadas de una celebridad
-      operationId: GetVideoCallScheduleByUser
-      parameters:
-      - name: userUUID
-        in: path
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-      responses:
-        "200":
-          description: Ok
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GenericSchema'
-  /video-calls-schedule/{videoCallScheduledUUID}:
-    put:
-      tags:
-      - Video llamadas - Schedule
-      summary: Actualiza una video llamada previamente agendada
-      operationId: UpdateVideoCallSchedule
-      parameters:
-      - name: videoCallScheduledUUID
-        in: path
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-      requestBody:
-        description: Body a enviar
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/GenericSchema'
-        required: true
-      responses:
-        "200":
-          description: Ok
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GenericSchema'
-    patch:
-      tags:
-      - Video llamadas - Schedule
-      summary: Actualiza el estatus de una video llamada previamente agendada
-      operationId: UpdateVideoCallScheduleStatus
-      parameters:
-      - name: videoCallScheduledUUID
-        in: path
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-      requestBody:
-        description: Body a enviar
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/GenericSchema'
-        required: true
-      responses:
-        "200":
-          description: Ok
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GenericSchema'
-  /celebrities.payments:
+  /celebrities/payments:
     get:
       tags:
       - Celebridades - Payments
@@ -615,7 +496,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GenericSchema'
-  /celebrities.payments/{userUUID}:
+  /celebrities/payments/{userUUID}:
     get:
       tags:
       - Celebridades - Payments
@@ -636,7 +517,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GenericSchema'
-  /celebrities.payments/{paymentUUID}:
+  /celebrities/payments/{paymentUUID}:
     patch:
       tags:
       - Celebridades - Payments
@@ -788,7 +669,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GenericSchema'
-  /fans.uploads.profile-picture/{userUUID}:
+  /fans/uploads/profile-picture/{userUUID}:
     get:
       tags:
       - Fans - Uploads
@@ -836,7 +717,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GenericSchema'
-  /fans.purchases:
+  /fans/purchases:
     get:
       tags:
       - Fans - Purchases
@@ -860,7 +741,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GenericSchema'
-  /fans.purchases/{userUUID}:
+  /fans/purchases/{userUUID}:
     get:
       tags:
       - Fans - Purchases
@@ -881,7 +762,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GenericSchema'
-  /fans.purchases/{userUUID}/{purchaseUUID}:
+  /fans/purchases/{userUUID}/{purchaseUUID}:
     get:
       tags:
       - Fans - Purchases
@@ -909,7 +790,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GenericSchema'
-  /fans.refounds:
+  /fans/refounds:
     get:
       tags:
       - Fans - Refounds
@@ -952,7 +833,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GenericSchema'
-  /fans.refounds/{userUUID}:
+  /fans/refounds/{userUUID}:
     get:
       tags:
       - Fans - Refounds
@@ -973,7 +854,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GenericSchema'
-  /fans.refounds/{userUUID}/{refoundUUID}:
+  /fans/refounds/{userUUID}/{refoundUUID}:
     get:
       tags:
       - Fans - Refounds
@@ -1167,6 +1048,125 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GenericSchema'
+  /video-calls-schedule:
+    get:
+      tags:
+      - Video llamadas - Schedule
+      summary: Lista las video llamadas generadas
+      operationId: ListVideoCallsScheduled
+      parameters:
+      - name: status
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          enum:
+          - active
+          - inactive
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSchema'
+    post:
+      tags:
+      - Video llamadas - Schedule
+      summary: Crea una nueva video llamada con un fan
+      operationId: CreateVideoCallSchedule
+      requestBody:
+        description: Body a enviar
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenericSchema'
+        required: true
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSchema'
+  /video-calls-schedule/{userUUID}:
+    get:
+      tags:
+      - Video llamadas - Schedule
+      summary: Lista las video llamadas agendadas de una celebridad
+      operationId: GetVideoCallScheduleByUser
+      parameters:
+      - name: userUUID
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSchema'
+  /video-calls-schedule/{videoCallScheduledUUID}:
+    put:
+      tags:
+      - Video llamadas - Schedule
+      summary: Actualiza una video llamada previamente agendada
+      operationId: UpdateVideoCallSchedule
+      parameters:
+      - name: videoCallScheduledUUID
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        description: Body a enviar
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenericSchema'
+        required: true
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSchema'
+    patch:
+      tags:
+      - Video llamadas - Schedule
+      summary: Actualiza el estatus de una video llamada previamente agendada
+      operationId: UpdateVideoCallScheduleStatus
+      parameters:
+      - name: videoCallScheduledUUID
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        description: Body a enviar
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenericSchema'
+        required: true
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSchema'
   /emergency-exits:
     get:
       tags:
@@ -1259,7 +1259,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GenericSchema'
-  /analytics.dashboard.key-indicators:
+  /analytics/dashboard.key-indicators:
     get:
       tags:
       - Analytics - Dashboard
@@ -1283,7 +1283,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GenericSchema'
-  /analytics.dashboard.key-indicators/{userUUID}:
+  /analytics/dashboard/key-indicators/{userUUID}:
     get:
       tags:
       - Analytics - Dashboard
@@ -1304,7 +1304,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GenericSchema'
-  /analytics.dashboard.data:
+  /analytics/dashboard.data:
     get:
       tags:
       - Analytics - Dashboard
@@ -1328,7 +1328,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GenericSchema'
-  /analytics.reports:
+  /analytics/reports:
     get:
       tags:
       - Analytics - Reports
@@ -1352,7 +1352,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GenericSchema'
-  /analytics.tracking:
+  /analytics/tracking:
     post:
       tags:
       - Analytics - Tracking
@@ -1372,7 +1372,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GenericSchema'
-  /system.properties:
+  /system/properties:
     get:
       tags:
       - Propiedades - Sistema
@@ -1396,7 +1396,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GenericSchema'
-  /system.properties/{propertieUUID}:
+  /system/properties/{propertieUUID}:
     put:
       tags:
       - Propiedades - Sistema
@@ -1424,7 +1424,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GenericSchema'
-  /app.properties:
+  /app/properties:
     get:
       tags:
       - Propiedades - APP
