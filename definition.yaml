@@ -14,7 +14,7 @@ tags:
   description: Gestion de las celebridades
 - name: Celebridades - Upgrade process
   description: Gestion del proceso de upgrade a celebridad
-- name: Celebridades - Penalizaciones
+- name: Celebridades - Penalizations
   description: Gestiona las penalizaciones impuestas a las celebridades
 - name: Celebridades - Documents
   description: Gestiona las cargas de archivos para el proceso de acreditación de celebridad
@@ -22,6 +22,8 @@ tags:
   description: Gestiona la carga de facturas de las celebridades
 - name: Celebridades - Payments
   description: Administra los pagos de las celebridades
+- name: Celebridades - Tags
+  description: Administra las busquedas de celebridades por tags
 - name: Fans
   description: Gestion de los fans
 - name: Fans - Uploads
@@ -261,7 +263,7 @@ paths:
   /celebrities/penalizations:
     get:
       tags:
-      - Celebridades - Penalizaciones
+      - Celebridades - Penalizations
       summary: Lista todas las penalizaciones a celebridaes
       operationId: ListCelebritiesPenalizations
       parameters:
@@ -285,7 +287,7 @@ paths:
   /celebrities/penalizations/{userUUID}:
     get:
       tags:
-      - Celebridades - Penalizaciones
+      - Celebridades - Penalizations
       summary: Obtiene las penalizaciones de una celebridad
       operationId: GetCelebritiePenalization
       parameters:
@@ -538,6 +540,30 @@ paths:
             schema:
               $ref: '#/components/schemas/GenericSchema'
         required: true
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSchema'
+  /celebrities/tags:
+    get:
+      tags:
+      - Celebridades - Tags
+      summary: Lista una busqueda de celebridades por tags
+      operationId: ListCelebritiesByTags
+      parameters:
+      - name: status
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          enum:
+          - active
+          - inactive
       responses:
         "200":
           description: Ok
