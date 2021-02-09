@@ -985,14 +985,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GenericSchema'
-  /managers/{userUUID}:
+  /managers/{managerUUID}:
     get:
       tags:
       - Managers
       summary: Obtiene a un manager específico
       operationId: GetManager
       parameters:
-      - name: userUUID
+      - name: managerUUID
         in: path
         required: true
         style: simple
@@ -1012,7 +1012,7 @@ paths:
       summary: Actualiza a un manager específico
       operationId: UpdateManager
       parameters:
-      - name: userUUID
+      - name: managerUUID
         in: path
         required: true
         style: simple
@@ -1039,6 +1039,88 @@ paths:
       summary: Elimina a un manager existente
       operationId: DeleteManager
       parameters:
+      - name: managerUUID
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSchema'
+  /managers/{managerUUID}/{userUUID}:
+    get:
+      tags:
+      - Managers
+      summary: Lista a las celebridades que administra un manager específico
+      operationId: ListManagerUsers
+      parameters:
+      - name: managerUUID
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: userUUID
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSchema'
+    post:
+      tags:
+      - Managers
+      summary: Asocia a una nueva celebridad para que sea administrada por un manager
+      operationId: CreateManagerUser
+      parameters:
+      - name: managerUUID
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: userUUID
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSchema'
+    delete:
+      tags:
+      - Managers
+      summary: Desasocia a una celebridad de la administración de un manager
+      operationId: DeleteManagerUser
+      parameters:
+      - name: managerUUID
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
       - name: userUUID
         in: path
         required: true
